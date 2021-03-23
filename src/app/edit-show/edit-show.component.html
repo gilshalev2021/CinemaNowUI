@@ -1,0 +1,45 @@
+<div class="container">
+
+  <h3 mat-dialog-title>{{show.movie.title}}</h3>
+
+  <mat-divider></mat-divider>
+
+  <form class="my-mat-dialog-content" #formControl="ngForm">
+
+    <img src="http://image.tmdb.org/t/p/w300/{{show.movie.posterPath}}"
+         loading="lazy"
+         class="center">
+    <div class="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Select Hall</mat-label>
+        <mat-select [(ngModel)]="show.hall" name="hall">
+          <mat-option value='1'>Hall 1</mat-option>
+          <mat-option value='2'>Hall 2</mat-option>
+          <mat-option value='3'>Hall 3</mat-option>
+          <mat-option value='4'>Hall 4</mat-option>
+          <mat-option value='5'>Hall 5</mat-option>
+          <mat-option value='6'>Hall 6</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Select Date of Show:</mat-label>
+        <input mat-stroked-button matInput type="date"
+               [(ngModel)]="show.date" name="showDate"
+               placeholder="Set Show Date">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Select Time of Show:</mat-label>
+        <input mat-stroked-button matInput type="time"
+               [(ngModel)]="show.time" name="showTime"
+               placeholder="Set Show Time">
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-raised-button color="accent" (click)="closeDialog()">Cancel</button>
+      <button mat-raised-button color="accent" cdkFocusInitial (click)="updateShow()">Save</button>
+    </div>
+
+  </form>
+</div>

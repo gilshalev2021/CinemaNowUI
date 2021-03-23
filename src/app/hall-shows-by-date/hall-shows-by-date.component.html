@@ -1,0 +1,25 @@
+<div>
+  <br>
+  <mat-label *ngIf="hallDailyShows?.length>0">Display daily shows by Hall:</mat-label>
+  <br>
+  <mat-grid-list cols="6" rowHeight="4:3" gutterSize="10px">
+    <mat-grid-tile
+      class="title-tem"
+      *ngFor="let hallDailyShow of hallDailyShows"
+      [colspan]="1"
+      [rowspan]="1"
+      [style.background]="'#2196F3'">
+      <div style="margin-top: 50px;" >
+        <ul>
+          <li style="margin-left: 10px" *ngFor="let show of hallDailyShow.shows">
+            {{show.time}} {{show.movie.title}}
+          </li>
+        </ul>
+      </div>
+      <mat-grid-tile-header>
+        <h3>{{hallDailyShow.hall}}</h3>
+        <img width="50" src=" ./assets/cinema4.png" width="30px" style="margin-left: 70%">
+      </mat-grid-tile-header>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

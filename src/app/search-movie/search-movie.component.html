@@ -1,0 +1,46 @@
+<div class="container-fluid" style="margin-top:30px; margin-left: 20px; margin-right: 20px;">
+
+  <mat-form-field style="width: 40%;" color="accent">
+    <mat-label>Search Movies From TMDB</mat-label>
+    <input #searchInput matInput placeholder="Find New Movies To your theater"
+           (keyup)="search(searchInput.value)">
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" *ngIf="searchText" (click)="bringMoreResults()" style="float: right">Show More
+  </button>
+
+  <mat-grid-list cols="4" rowHeight="4:2" gutterSize="10px">
+    <mat-grid-tile
+      *ngFor="let movie of dataSource"
+      [colspan]="1"
+      [rowspan]="1"
+      [style.background]="'#2196F3'">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="http://image.tmdb.org/t/p/w300/{{movie.backdrop_path}}" loading="lazy"
+                 style="width: 300px; margin-top: 20px; margin-bottom: 20px">
+          </div>
+          <div class="flip-card-back">
+            <br>
+            <h4>Movie Overview:</h4>
+            <p>{{movie.overview}}</p>
+          </div>
+        </div>
+      </div>
+      <mat-grid-tile-header style="height: 24px">
+        <h3>{{movie.title}}</h3>
+      </mat-grid-tile-header>
+      <mat-grid-tile-footer style="height: 24px">
+        <button mat-icon-button color="accent" matTooltip="Save movie to your local data-base"
+                (click)="saveMovie(movie)" style="float: right">
+          <mat-icon>save</mat-icon>
+        </button>
+      </mat-grid-tile-footer>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+</div>
+
+<br>
+<br>

@@ -1,0 +1,64 @@
+<div class="container-fluid" style="margin-top:30px; margin-left: 20px; margin-right: 20px;">
+
+  <div class="form">
+    <mat-form-field>
+      <mat-label>Select Date of Show:</mat-label>
+      <input mat-stroked-button matInput type="date"
+             [(ngModel)]="dateFilter" name="dateFilter"
+             (change)="onDateSelected($event)"
+             placeholder="Set Show Date">
+    </mat-form-field>
+    <mat-form-field style="width: 50%; margin-left: 20px" color="accent">
+      <mat-label>Filter shows by movie</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Filter shows" #input>
+    </mat-form-field>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort style="width: 100%;">
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef >Show Date</th>
+        <td mat-cell *matCellDef="let show"> {{show.date}} </td>
+      </ng-container>
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Show Time</th>
+        <td mat-cell *matCellDef="let show"> {{show.time}} </td>
+      </ng-container>
+      <ng-container matColumnDef="movieTitle">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Movie</th>
+        <td mat-cell *matCellDef="let show"> {{show.movie.title}} </td>
+      </ng-container>
+      <ng-container matColumnDef="hall">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hall</th>
+        <td mat-cell *matCellDef="let show" matTooltip="{{show.hall}}"> Hall - {{show.hall}} </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>
+          <button mat-icon-button color="primary" matTooltip="Load shows" (click)="loadShowsByDate()" style="float: right">
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </th>
+        <td mat-cell *matCellDef="let show">
+          <button mat-icon-button color="accent" matTooltip="Delete show" (click)="deleteShow(show)"
+                  style="float: right">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" matTooltip="Edit a Show" (click)="editShow(show)" style="float: right">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; let even = even;" [ngClass]="{gray: even}"></tr>
+
+    </table>
+
+    <mat-paginator [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+  </div>
+
+  <app-hall-shows-by-date [hallDailyShows]="hallDailyShows" style="height: 200px"></app-hall-shows-by-date>
+
+</div>
